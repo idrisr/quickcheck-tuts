@@ -5,7 +5,7 @@ import Test.QuickCheck
 
 main :: IO ()
 main = do
-    quickCheck prop_commutativeAdd
-    quickCheck prop_commutativeAdd2
-    quickCheck prop_commutativeAdd3
+    _ <- quickCheck prop_commutativeAdd
+    _ <- quickCheck prop_commutativeAdd2
+    _ <- quickCheck prop_commutativeAdd3
     quickCheck (prop_associative :: Float -> Float -> Float -> Bool)

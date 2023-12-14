@@ -1,9 +1,10 @@
 {
-  inputs.nixpkgs.url = "github:nixos/nixpkgs/23.05";
-  outputs = { self, nixpkgs, ... }:
+  inputs.nixpkgs.url = "github:nixos/nixpkgs/23.11";
+  inputs.flake-utils.url = "github:numtide/flake-utils";
+  outputs = { self, nixpkgs, flake-utils }:
     let
-      system = "x86_64-linux";
-      compiler = "ghc927";
+      system = flake-utils.lib.system.x86_64-linux;
+      compiler = "ghc948";
       pkgs = import nixpkgs { system = system; };
       hPkgs = pkgs.haskell.packages."${compiler}";
       myDevTools = with hPkgs; [
@@ -17,8 +18,6 @@
         retrie
         cabal-install
         pkgs.zlib
-        QuickCheck
-        hspec
       ];
     in {
       devShells.${system}.default = pkgs.mkShell {

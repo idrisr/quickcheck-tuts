@@ -1,44 +1,55 @@
 cabal-version:      3.0
 name:               griffs
 version:            0.1.0.0
-license:            MIT
-license-file:       LICENSE
-author:             Idris Raja
-maintainer:         idris.raja@gmail.com
 build-type:         Simple
-extra-doc-files:    CHANGELOG.md
 
 common warnings
     ghc-options: -Wall
 
 library
     import:           warnings
-    exposed-modules:  Stuff
-    build-depends:    base ^>=4.16.4.0
+    exposed-modules:
+        Encoder
+        Stuff
+        Sentence
+    build-depends:
+        base
+        , bytestring
+        , containers
+        , QuickCheck
+        , quickcheck-instances
+        , regex-posix
+        , tasty
+        , tasty-quickcheck
     hs-source-dirs:   src
     default-language: Haskell2010
 
-executable griffs
+executable exe
     import:           warnings
     main-is:          Main.hs
     build-depends:
-        base ^>=4.16.4.0,
-        griffs
+        base
+        , griffs
     hs-source-dirs:   app
     default-language: Haskell2010
 
-test-suite testsuite
+test-suite tests
     import:           warnings
     default-language: Haskell2010
-    other-modules:    Basic, Decode
+    other-modules:
+        Basic
+        FunTest
     type:             exitcode-stdio-1.0
     hs-source-dirs:   test
     main-is:          Main.hs
     build-depends:
-        base ^>=4.16.4.0
-        , griffs
+        base
         , bytestring
+        , griffs
         , QuickCheck
         , quickcheck-arbitrary-adt
-        , test-invariant
         , quickcheck-instances
+        , test-invariant
+        , random
+        , tasty
+        , tasty-quickcheck
